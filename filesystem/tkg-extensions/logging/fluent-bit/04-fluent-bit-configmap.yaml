@@ -51,7 +51,12 @@ data:
   #@ elif values.fluent_bit.output_plugin == 'http' :
 
   filter-modify.conf: #@ fluent_bit_config.get_filter_modify_config()
-  output-http.conf: #@ output_plugins_config.get_output_http_config(values.fluent_bit.http.host, values.fluent_bit.http.port, values.fluent_bit.http.uri, values.fluent_bit.http.header_key_value, values.fluent_bit.http.format)
+  output-http.conf: #@ output_plugins_config.get_output_http_config(values.fluent_bit.http.host, values.fluent_bit.http.port, values.fluent_bit.http.uri, values.fluent_bit.http.header_key_value, values.fluent_bit.http.format, values.fluent_bit.http.tls_verify)
+
+  #@ elif values.fluent_bit.output_plugin == 'syslog' :
+
+  output-syslog.conf: #@ output_plugins_config.get_output_syslog_config(values.fluent_bit.syslog.host, values.fluent_bit.syslog.port, values.fluent_bit.syslog.mode, values.fluent_bit.syslog.format, values.fluent_bit.syslog.severity_key, values.fluent_bit.syslog.facility_key, values.fluent_bit.syslog.hostname_key, values.fluent_bit.syslog.appname_key, values.fluent_bit.syslog.procid_key, values.fluent_bit.syslog.msgid_key, values.fluent_bit.syslog.sd_key, values.fluent_bit.syslog.message_key)
+
   #@ end
 
   parsers.conf: #@ fluent_bit_config.get_parsers_config(values.fluent_bit.output_plugin)

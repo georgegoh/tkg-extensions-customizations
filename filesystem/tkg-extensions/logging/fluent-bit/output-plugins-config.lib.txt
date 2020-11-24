@@ -38,7 +38,7 @@
     TLS.Verify     Off
 (@ end -@)
 
-(@- def get_output_http_config(http_host, http_port, http_uri, http_header_key_value, http_format): -@)
+(@- def get_output_http_config(http_host, http_port, http_uri, http_header_key_value, http_format, http_tls_verify): -@)
 [OUTPUT]
     Name              http
     Match             *
@@ -48,7 +48,25 @@
     Header            (@=http_header_key_value @)
     Format            (@=http_format @)
     tls               On
+    tls.verify        (@=http_tls_verify @)
 (@ end @)
 
+(@- def get_output_syslog_config(syslog_host, syslog_port, syslog_mode, syslog_format, syslog_severity_key, syslog_facility_key, syslog_hostname_key, syslog_appname_key, syslog_procid_key, syslog_msgid_key, syslog_sd_key, syslog_message_key): -@)
+[OUTPUT]
+    Name           syslog
+    Match          *
+    Host           (@=syslog_host @)
+    Port           (@=syslog_port @)
+    Mode           (@=syslog_mode @)
+    Syslog_Format  (@=syslog_format @)
+    Syslog_Severity_Key (@=syslog_severity_key @)
+    Syslog_Facility_Key (@=syslog_facility_key @)
+    Syslog_Hostname_Key (@=syslog_hostname_key @)
+    Syslog_Appname_Key  (@=syslog_appname_key @)
+    Syslog_Procid_Key (@=syslog_procid_key @)
+    Syslog_Msgid_Key (@=syslog_msgid_key @)
+    Syslog_Sd_Key (@=syslog_sd_key @)
+    Syslog_Message_Key (@=syslog_message_key @)
+(@ end -@)
 
-(@ output_plugins_config = struct.make(get_output_elastic_config=get_output_elastic_config, get_output_kafka_config=get_output_kafka_config, get_output_splunk_config=get_output_splunk_config, get_output_http_config=get_output_http_config) @)
+(@ output_plugins_config = struct.make(get_output_elastic_config=get_output_elastic_config, get_output_kafka_config=get_output_kafka_config, get_output_splunk_config=get_output_splunk_config, get_output_http_config=get_output_http_config, get_output_syslog_config=get_output_syslog_config) @)

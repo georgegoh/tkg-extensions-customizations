@@ -20,7 +20,7 @@ end
 
 def validate_fluent_bit_output_plugin():
   # Checking for supported fluent bit backends
-  data.values.fluent_bit.output_plugin in ("elasticsearch", "kafka", "splunk", "http") or assert.fail("fluent bit output plugin should be either elasticsearch or kafka or splunk or http")
+  data.values.fluent_bit.output_plugin in ("elasticsearch", "kafka", "splunk", "http", "syslog") or assert.fail("fluent bit output plugin should be either elasticsearch or kafka or splunk or http or syslog")
 end
 
 def validate_fluent_bit_image():
