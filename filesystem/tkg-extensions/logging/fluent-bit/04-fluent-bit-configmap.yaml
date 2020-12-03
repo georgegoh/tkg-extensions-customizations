@@ -60,7 +60,7 @@ data:
 
   #@ elif values.fluent_bit.output_plugin == 'syslog' :
 
-  output-syslog.conf: #@ output_plugins_config.get_output_syslog_config(values.fluent_bit.syslog.host, values.fluent_bit.syslog.port, values.fluent_bit.syslog.mode, values.fluent_bit.syslog.format, values.fluent_bit.syslog.severity_key, values.fluent_bit.syslog.facility_key, values.fluent_bit.syslog.hostname_key, values.fluent_bit.syslog.appname_key, values.fluent_bit.syslog.procid_key, values.fluent_bit.syslog.msgid_key, values.fluent_bit.syslog.sd_key, values.fluent_bit.syslog.message_key)
+  output-syslog.conf: #@ output_plugins_config.get_output_syslog_config(values.fluent_bit.syslog.host, values.fluent_bit.syslog.port, values.fluent_bit.syslog.mode, values.fluent_bit.syslog.format, values.fluent_bit.syslog.hostname_key, values.fluent_bit.syslog.appname_key, values.fluent_bit.syslog.procid_key, values.fluent_bit.syslog.message_key, values.fluent_bit.syslog.sd_key)
 
   #@ end
 
