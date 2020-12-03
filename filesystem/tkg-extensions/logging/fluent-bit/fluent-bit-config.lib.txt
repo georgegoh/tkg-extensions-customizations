@@ -24,7 +24,7 @@
     Name              tail
     Tag               kube.*
     Path              /var/log/containers/*.log
-    Parser            cri
+    Parser            cri-mod
     DB                /var/log/flb_kube.db
     (@ if fluent_bit_output_plugin == 'http' : -@)
     Mem_Buf_Limit     500KB
@@ -146,6 +146,20 @@
     Name    kube-custom
     Format  regex
     Regex   (?<tag>[^.]+)?\.?(?<pod_name>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)_(?<namespace_name>[^_]+)_(?<container_name>.+)-(?<docker_id>[a-z0-9]{64})\.log$
+
+[PARSER]
+    Name    cri-mod
+    Format  regex
+    Regex ^(?<time>[^ ]+) (?<stream>stdout|stderr) (?<logtag>[^ ]*) (?<log>.*)$
+    Time_Key    time
+    Time_Format %Y-%m-%dT%H:%M:%S.%L%z
+    Time_Keep   On
+
+[PARSER]
+    Name    catchall
+    Format  regex
+    Regex   ^(?<message>.*)$
+
 (@ end @)
 
 (@ fluent_bit_config = struct.make(get_fluent_bit_config=get_fluent_bit_config, get_input_kubernetes_config=get_input_kubernetes_config, get_filter_record_config=get_filter_record_config, get_filter_modify_config=get_filter_modify_config, get_parsers_config=get_parsers_config) @)
