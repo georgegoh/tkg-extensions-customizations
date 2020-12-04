@@ -1,4 +1,4 @@
-Carvel customizations for TKG extensions.
+# Logging customizations for TKG extensions.
 
 The code in this repository demonstrates how to add a syslog output to the tkg-extensions logging module for TKG 1.2.
 
